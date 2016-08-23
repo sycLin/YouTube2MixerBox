@@ -61,7 +61,13 @@ function writeSuccess(youtubeVideoId) {
 	mainDiv.appendChild(img);
 	document.getElementById('mixerbox-link-image').addEventListener('click', function(e) {
 		// clicked
-		// create new tab
+		// 1) pause the YouTube video
+		chrome.tabs.executeScript(
+			null,
+			{code: "document.getElementsByTagName('video')[0].pause()"},
+			null
+		);
+		// 2) create new tab
 		chrome.tabs.create({url: "http://www.mixerbox.com/music/0/" + youtubeVideoId}, null);
 	});
 }
